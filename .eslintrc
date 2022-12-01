@@ -9,6 +9,7 @@
 	"rules": {
 		"prettier/prettier": "error",
 		"no-case-declarations": "off",
-		"no-constant-condition": "off"
+		"no-constant-condition": "off",
+		"import/no-anonymous-default-export": "off"
 	}
 }
