@@ -6,7 +6,8 @@
 		"lazyload",
 		"swiper",
 		"TTFB",
-		"twobin"
+		"twobin",
+		"vconsole"
 	],
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
