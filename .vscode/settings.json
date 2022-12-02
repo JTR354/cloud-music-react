@@ -5,7 +5,8 @@
 		"iconfont",
 		"lazyload",
 		"swiper",
-		"TTFB"
+		"TTFB",
+		"twobin"
 	],
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
