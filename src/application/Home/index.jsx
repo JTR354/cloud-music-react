@@ -1,13 +1,13 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
-import { Top, Tab, TabItem } from './style';
+import { Top, Tab, TabItem, Main, Container } from './style';
 import { NavLink } from 'react-router-dom'; // 利用 NavLink 组件进行路由跳转
 
 function Home(props) {
 	const { route } = props;
 
 	return (
-		<div>
+		<Main>
 			<Top>
 				<span className="iconfont menu">&#xe65c;</span>
 				<span className="title">Web App</span>
@@ -30,8 +30,8 @@ function Home(props) {
 					</TabItem>
 				</NavLink>
 			</Tab>
-			{renderRoutes(route.routes)}
-		</div>
+			<Container>{renderRoutes(route.routes)}</Container>
+		</Main>
 	);
 }
 

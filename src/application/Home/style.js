@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 import style from '../../assets/global-style';
 
+export const Main = styled.main`
+	/* display: flex; */
+	/* flex-flow: column; */
+	height: 100vh;
+`;
+
+export const Container = styled.section`
+	/* flex: 1 1 auto; */
+	position: relative;
+`;
+
 export const Top = styled.div`
 	display: flex;
 	flex-direction: row;

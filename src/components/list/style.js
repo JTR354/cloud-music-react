@@ -27,6 +27,8 @@ export const ListItem = styled.div`
 	flex: 1 1 32%;
 
 	.img_wrapper {
+		height: 0;
+		padding-bottom: 100%;
 		.decorate {
 			position: absolute;
 			top: 0;
