@@ -1,5 +1,12 @@
 {
-	"cSpell.words": ["commitlint", "iconfont", "lazyload", "swiper", "TTFB"],
+	"cSpell.words": [
+		"branchs",
+		"commitlint",
+		"iconfont",
+		"lazyload",
+		"swiper",
+		"TTFB"
+	],
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[javascript]": {
