@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.c1664ab2.css",
-    "main.js": "/static/js/main.7bcf5cea.js",
-    "static/js/787.7783e6b5.chunk.js": "/static/js/787.7783e6b5.chunk.js",
-    "static/media/music.png": "/static/media/music.6275a6cec78789e414a1.png",
-    "index.html": "/index.html",
-    "main.c1664ab2.css.map": "/static/css/main.c1664ab2.css.map",
-    "main.7bcf5cea.js.map": "/static/js/main.7bcf5cea.js.map",
-    "787.7783e6b5.chunk.js.map": "/static/js/787.7783e6b5.chunk.js.map"
+    "main.css": "/cloud-music-react/static/css/main.c1664ab2.css",
+    "main.js": "/cloud-music-react/static/js/main.db2b8681.js",
+    "static/js/787.7783e6b5.chunk.js": "/cloud-music-react/static/js/787.7783e6b5.chunk.js",
+    "static/media/music.png": "/cloud-music-react/static/media/music.6275a6cec78789e414a1.png",
+    "index.html": "/cloud-music-react/index.html",
+    "main.c1664ab2.css.map": "/cloud-music-react/static/css/main.c1664ab2.css.map",
+    "main.db2b8681.js.map": "/cloud-music-react/static/js/main.db2b8681.js.map",
+    "787.7783e6b5.chunk.js.map": "/cloud-music-react/static/js/787.7783e6b5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c1664ab2.css",
-    "static/js/main.7bcf5cea.js"
+    "static/js/main.db2b8681.js"
   ]
 }
