@@ -1,16 +1,28 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 
+import { IconStyle } from './assets/iconfont/iconfont';
 import { GlobalStyle } from './style';
-
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
+
+const IconSearch = styled.div`
+  font-family: 'iconfont';
+  &::before {
+    content: '\\e619';
+  }
+`;
+
 function App() {
   const [count, setCount] = useState(0);
   return (
     <>
       <GlobalStyle />
+      <IconStyle />
       <h1>Vite + React</h1>
+      <IconSearch />
+      {/* <i className="iconfont">&#xe619;</i> */}
       <div className="card">
         <button
           onClick={() => {

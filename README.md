@@ -29,4 +29,4 @@ If you are developing a production application, we recommend updating the config
 ## TodoList
 
 - [x] prettier eslint 配合使用，eslint-config-prettier , prettier-eslint, vscode settings, eslint-plugin-import
-- [ ] font-face基本用法
+- [x] font-face基本用法
