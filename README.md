@@ -30,3 +30,6 @@ If you are developing a production application, we recommend updating the config
 
 - [x] prettier eslint 配合使用，eslint-config-prettier , prettier-eslint, vscode settings, eslint-plugin-import
 - [x] font-face基本用法
+- [x] react-router-dom v6
+- [x] react-redux
+- [x] @reduxjs/toolkit
