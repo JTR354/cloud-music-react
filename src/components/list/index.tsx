@@ -14,7 +14,6 @@ type PropType = {
     name: string;
   }[];
 };
-console.log(PlaceholderImage);
 const RecommendList: FC<PropType> = (props) => {
   return (
     <ListWrapper>

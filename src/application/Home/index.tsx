@@ -1,15 +1,16 @@
 import { useCallback } from 'react';
+import type { NavLinkProps } from 'react-router-dom';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import { Tab, TabItem, Top } from './style';
+type ActiveType = Parameters<
+  Exclude<NavLinkProps['className'], undefined | string>
+>[0];
 const Home = () => {
   console.log(Home.name);
-  const active = useCallback(
-    ({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
-      return isPending ? 'pending' : isActive ? 'selected' : '';
-    },
-    []
-  );
+  const active = useCallback(({ isActive, isPending }: ActiveType) => {
+    return isPending ? 'pending' : isActive ? 'selected' : '';
+  }, []);
   return (
     <div>
       <Top>
