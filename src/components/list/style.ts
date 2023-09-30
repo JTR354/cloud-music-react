@@ -48,6 +48,9 @@ export const ListItem = styled.div`
         vertical-align: top;
       }
     }
+    & > span {
+      padding-bottom: 100%;
+    }
     img {
       position: absolute;
       width: 100%;

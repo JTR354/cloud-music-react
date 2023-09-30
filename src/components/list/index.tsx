@@ -1,6 +1,10 @@
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import { FC } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { getCount } from '../../api/utils';
+import PlaceholderImage from './music.png';
 import { List, ListItem, ListWrapper } from './style';
 type PropType = {
   recommendList: {
@@ -10,6 +14,7 @@ type PropType = {
     name: string;
   }[];
 };
+console.log(PlaceholderImage);
 const RecommendList: FC<PropType> = (props) => {
   return (
     <ListWrapper>
@@ -21,11 +26,13 @@ const RecommendList: FC<PropType> = (props) => {
               <div className="img_wrapper">
                 <div className="decorate"></div>
                 {/* 加此参数可以减小请求的图片资源大小 */}
-                <img
+                <LazyLoadImage
                   src={item.picUrl + '?param=300x300'}
                   width="100%"
                   height="100%"
                   alt="music"
+                  placeholderSrc={PlaceholderImage}
+                  effect="blur"
                 />
                 <div className="play_count">
                   <i className="iconfont play">&#xe885;</i>

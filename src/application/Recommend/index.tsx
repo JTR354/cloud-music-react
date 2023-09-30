@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getBannerRequest, getRecommendListRequest } from '../../api/request';
+import Loading from '../../baseUI/loading';
 import RecommendList from '../../components/list';
 import Scroll from '../../components/scroll';
 import Slider from '../../components/slider';
@@ -15,20 +16,34 @@ export default function Counter() {
   });
   const dispatch = useDispatch();
 
+  const [loading, setLoading] = useState(
+    !bannerList.length || !recommendList.length
+  );
+
   useEffect(() => {
+    let count = 0;
+    function end() {
+      count++;
+      if (count >= 2) {
+        setLoading(false);
+      }
+    }
     !bannerList.length &&
       getBannerRequest().then((res) => {
         dispatch(updateBranchList(res?.banners || []));
+        end();
       });
     !recommendList.length &&
       getRecommendListRequest().then((res) => {
         dispatch(updateRecommendList(res?.result || []));
+        end();
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Content>
+      {loading && <Loading />}
       <Scroll>
         <Slider bannerList={bannerList} />
         <RecommendList recommendList={recommendList}></RecommendList>
