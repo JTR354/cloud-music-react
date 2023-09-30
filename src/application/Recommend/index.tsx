@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import RecommendList from '../../components/list';
+import Scroll from '../../components/scroll';
 import Slider from '../../components/slider';
 import type { RootState } from '../../store';
 import { decrement, increment } from './slice';
+import { Content } from './style';
 
 export default function Counter() {
   const count = useSelector((state: RootState) => {
@@ -28,28 +30,30 @@ export default function Counter() {
     };
   });
   return (
-    <div>
-      <Slider bannerList={bannerList} />
-      <RecommendList recommendList={recommendList}></RecommendList>
-      <div>
-        <button
-          aria-label="Increment value"
-          onClick={() => {
-            return dispatch(increment());
-          }}
-        >
-          Increment
-        </button>
-        <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => {
-            return dispatch(decrement());
-          }}
-        >
-          Decrement
-        </button>
-      </div>
-    </div>
+    <Content>
+      <Scroll>
+        <Slider bannerList={bannerList} />
+        <RecommendList recommendList={recommendList}></RecommendList>
+        <div>
+          <button
+            aria-label="Increment value"
+            onClick={() => {
+              return dispatch(increment());
+            }}
+          >
+            Increment
+          </button>
+          <span>{count}</span>
+          <button
+            aria-label="Decrement value"
+            onClick={() => {
+              return dispatch(decrement());
+            }}
+          >
+            Decrement
+          </button>
+        </div>
+      </Scroll>
+    </Content>
   );
 }

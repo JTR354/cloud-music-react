@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@better-scroll/core':
+    specifier: ^2.5.1
+    version: 2.5.1
   '@reduxjs/toolkit':
     specifier: ^1.9.6
     version: 1.9.6(react-redux@8.1.2)(react@18.2.0)
@@ -1409,6 +1412,16 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+
+  /@better-scroll/core@2.5.1:
+    resolution: {integrity: sha512-koKOuYA55dQ04FJRIVUpMGDr1hbCfWmfX0MGp1hKagkQSWSRpwblqACiwtggVauoj9aaJRJZ9hDsTM4weaavlg==}
+    dependencies:
+      '@better-scroll/shared-utils': 2.5.1
+    dev: false
+
+  /@better-scroll/shared-utils@2.5.1:
+    resolution: {integrity: sha512-AplkfSjXVYP9LZiD6JsKgmgQJ/mG4uuLmBuwLz8W5OsYc7AYTfN8kw6GqZ5OwCGoXkVhBGyd8NeC4xwYItp0aw==}
+    dev: false
 
   /@emotion/is-prop-valid@1.2.1:
     resolution: {integrity: sha512-61Mf7Ufx4aDxx1xlDeOm8aFFigGHE4z+0sKCa+IHCeZKiyP9RLD0Mmx7m8b9/Cf37f7NAvQOOJAbQQGVr5uERw==}

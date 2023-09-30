@@ -33,3 +33,4 @@ If you are developing a production application, we recommend updating the config
 - [x] react-router-dom v6
 - [x] react-redux
 - [x] @reduxjs/toolkit
+- [x] scroll-better
