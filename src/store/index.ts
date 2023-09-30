@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import recommendSlice from '../application/Recommend/slice';
+import recommend from '../application/Recommend/slice';
 
 export const store = configureStore({
   reducer: {
-    counter: recommendSlice,
+    recommend,
   },
 });
 
