@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface CounterState {
-  bannerList: [];
-  recommendList: [];
+export interface recommendState {
+  bannerList: unknown[];
+  recommendList: unknown[];
 }
 
-const initialState: CounterState = {
+const initialState: recommendState = {
   bannerList: [],
   recommendList: [],
 };
@@ -15,10 +15,10 @@ export const recommendSlice = createSlice({
   initialState,
   reducers: {
     updateBranchList: (state, { payload }) => {
-      state.bannerList = payload;
+      state.bannerList = payload || initialState.bannerList;
     },
     updateRecommendList: (state, { payload }) => {
-      state.recommendList = payload;
+      state.recommendList = payload || initialState.recommendList;
     },
   },
 });

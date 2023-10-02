@@ -30,12 +30,12 @@ export default function Counter() {
     }
     !bannerList.length &&
       getBannerRequest().then((res) => {
-        dispatch(updateBranchList(res?.banners || []));
+        dispatch(updateBranchList(res?.banners));
         end();
       });
     !recommendList.length &&
       getRecommendListRequest().then((res) => {
-        dispatch(updateRecommendList(res?.result || []));
+        dispatch(updateRecommendList(res?.result));
         end();
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
