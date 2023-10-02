@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getBannerRequest, getRecommendListRequest } from '../../api/request';
 import Loading from '../../baseUI/loading';
+import Scroll from '../../baseUI/scroll';
 import RecommendList from '../../components/list';
-import Scroll from '../../components/scroll';
 import Slider from '../../components/slider';
 import type { RootState } from '../../store';
 import { updateBranchList, updateRecommendList } from './slice';
 import { Content } from './style';
 
-export default function Counter() {
+const Recommend = () => {
+  console.info(Recommend.name);
   const { bannerList, recommendList } = useSelector((state: RootState) => {
     return state.recommend;
   });
@@ -45,9 +46,14 @@ export default function Counter() {
     <Content>
       {loading && <Loading />}
       <Scroll>
-        <Slider bannerList={bannerList} />
-        <RecommendList recommendList={recommendList}></RecommendList>
+        <div>
+          <div className="before"></div>
+          <Slider bannerList={bannerList} />
+          <RecommendList recommendList={recommendList}></RecommendList>
+        </div>
       </Scroll>
     </Content>
   );
-}
+};
+
+export default Recommend;

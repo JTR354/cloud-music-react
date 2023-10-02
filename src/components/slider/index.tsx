@@ -4,10 +4,10 @@ import { FC, useEffect, useState } from 'react';
 import Swiper from 'swiper';
 
 import { SliderContainer } from './style';
-type PropType = {
+export type SliderPropType = {
   bannerList: { imageUrl: string }[];
 };
-const Slider: FC<PropType> = ({ bannerList }) => {
+const Slider: FC<SliderPropType> = ({ bannerList }) => {
   const [sliderSwiper, setSliderSwiper] = useState<Swiper | null>(null);
   useEffect(() => {
     if (bannerList.length && !sliderSwiper) {

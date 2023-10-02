@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { getCount } from '../../api/utils';
 import PlaceholderImage from './music.png';
 import { List, ListItem, ListWrapper } from './style';
-type PropType = {
+export type ListPropType = {
   recommendList: {
     id: number;
     picUrl: string;
@@ -14,7 +14,7 @@ type PropType = {
     name: string;
   }[];
 };
-const RecommendList: FC<PropType> = (props) => {
+const RecommendList: FC<ListPropType> = (props) => {
   return (
     <ListWrapper>
       <h1 className="title"> 推荐歌单 </h1>

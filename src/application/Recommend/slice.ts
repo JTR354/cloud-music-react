@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface recommendState {
-  bannerList: unknown[];
-  recommendList: unknown[];
-}
+import { ListPropType } from '../../components/list';
+import { SliderPropType } from '../../components/slider';
+
+export type recommendState = ListPropType & SliderPropType;
 
 const initialState: recommendState = {
   bannerList: [],
