@@ -10,3 +10,23 @@ export const getCount = (count: number) => {
     return Math.floor(count / 10000000) / 10 + '亿';
   }
 };
+
+// 防抖函数
+export const debounce = (
+  func: ((...args: unknown[]) => void) | null,
+  delay: number
+) => {
+  if (func == null) return () => {};
+  let timer: number | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const newLocal: unknown = this;
+  return function (...args: unknown[]) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      func.apply(newLocal, args);
+      clearTimeout(timer);
+    }, delay);
+  };
+};

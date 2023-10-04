@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import style from '../../assets/global-style';
@@ -31,9 +32,9 @@ const LoadingWrapper = styled.div`
   }
 `;
 
-const Loading = () => {
+const Loading: FC<{ show?: boolean }> = ({ show }) => {
   return (
-    <LoadingWrapper>
+    <LoadingWrapper style={show ? { display: '' } : { display: 'none' }}>
       <div></div>
       <div></div>
     </LoadingWrapper>
