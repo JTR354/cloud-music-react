@@ -67,7 +67,7 @@ const Scroll = forwardRef<unknown, PropType>(
     {
       children,
       direction = 'vertical',
-      click = true,
+      click = false,
       refresh = true,
       onScroll = null,
       pullUp = null,
@@ -87,7 +87,9 @@ const Scroll = forwardRef<unknown, PropType>(
         scrollX: direction === 'horizontal',
         scrollY: direction === 'vertical',
         probeType: 3,
-        click: click,
+        click,
+        preventDefault: false,
+        stopPropagation: true,
         bounce: {
           top: bounceTop,
           bottom: bounceBottom,

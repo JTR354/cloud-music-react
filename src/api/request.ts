@@ -1,3 +1,4 @@
+import { RankItem } from '../application/Rank/slice';
 import type { SingerState } from '../application/Singers/slice';
 import { axiosInstance } from './config';
 export const getBannerRequest = () => {
@@ -23,4 +24,8 @@ export const getSingerListRequest = (
   return axiosInstance.get<unknown, SingerResult>(
     `/artist/list?cat=${category}&initial=${alpha.toLowerCase()}&offset=${count}`
   );
+};
+
+export const getRankListRequest = () => {
+  return axiosInstance.get<unknown, { list: RankItem[] }>(`/toplist/detail`);
 };
