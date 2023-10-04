@@ -34,3 +34,4 @@ If you are developing a production application, we recommend updating the config
 - [x] react-redux
 - [x] @reduxjs/toolkit
 - [x] scroll-better
+- [x] react-transition-group

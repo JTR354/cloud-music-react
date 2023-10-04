@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import Album from '../application/Album';
 import Home from '../application/Home';
 import Rank from '../application/Rank';
 import Recommend from '../application/Recommend';
@@ -22,6 +23,12 @@ const router = createBrowserRouter([
       {
         path: '/recommend',
         Component: Recommend,
+        children: [
+          {
+            path: '/recommend/:id',
+            Component: Album,
+          },
+        ],
       },
       {
         path: '/singers',
