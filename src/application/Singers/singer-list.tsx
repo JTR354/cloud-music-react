@@ -15,14 +15,6 @@ const SignerList: FC<
   singerList,
   children,
 }) => {
-  // const singerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(() => {
-  //   return {
-  //     picUrl:
-  //       'https://p2.music.126.net/uTwOm8AEFFX_BYHvfvFcmQ==/109951164232057952.jpg',
-  //     name: '隔壁老樊',
-  //     accountId: 277313426,
-  //   };
-  // });
   return (
     <ListContainer>
       <Scroll

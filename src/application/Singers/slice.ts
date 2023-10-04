@@ -23,7 +23,6 @@ export const singerSlice = createSlice({
       state.singerList = payload || initialState.singerList;
     },
     changeEnterLoading: (state, { payload }) => {
-      console.log({ payload });
       state.enterLoading = payload || initialState.enterLoading;
     },
     changePullDownLoading: (state, { payload }) => {

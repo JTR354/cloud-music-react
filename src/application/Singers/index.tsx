@@ -43,7 +43,6 @@ const Singers = () => {
         const data = res.artists;
         dispatch(changeSingerList(data));
         dispatch(changeEnterLoading(false));
-        console.log(data);
         dispatch(changePullDownLoading(false));
       })
       .catch(() => {
@@ -134,7 +133,6 @@ const Singers = () => {
         });
     }
   };
-  console.log(enterLoading, 123);
 
   return (
     <div>
@@ -157,8 +155,8 @@ const Singers = () => {
       <SignerList
         pullDown={pullDown}
         pullUp={pullUp}
-        pullUpLoading={pullDownLoading}
-        pullDownLoading={pullUpLoading}
+        pullUpLoading={pullUpLoading}
+        pullDownLoading={pullDownLoading}
         singerList={singerList}
       >
         <Loading show={enterLoading} />

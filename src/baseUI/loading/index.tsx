@@ -13,7 +13,7 @@ const loading = keyframes`
 `;
 const LoadingWrapper = styled.div`
   > div {
-    position: fixed;
+    position: absolute;
     z-index: 1000;
     left: 0;
     right: 0;
@@ -32,7 +32,7 @@ const LoadingWrapper = styled.div`
   }
 `;
 
-const Loading: FC<{ show?: boolean }> = ({ show }) => {
+const Loading: FC<{ show?: boolean }> = ({ show = true }) => {
   return (
     <LoadingWrapper style={show ? { display: '' } : { display: 'none' }}>
       <div></div>
