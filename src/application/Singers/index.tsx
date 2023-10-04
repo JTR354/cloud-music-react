@@ -37,6 +37,7 @@ const Singers = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (singerList.length) return;
     dispatch(changeEnterLoading(true));
     getHotSingerListRequest(0)
       .then((res) => {
