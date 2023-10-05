@@ -1,5 +1,6 @@
 import { AlbumType } from '../application/Album/slice';
 import { RankItem } from '../application/Rank/slice';
+import { SingerItemState } from '../application/Singer/slice';
 import type { SingerState } from '../application/Singers/slice';
 import { axiosInstance } from './config';
 export const getBannerRequest = () => {
@@ -35,4 +36,14 @@ export const getAlbumDetailRequest = (id: string | undefined) => {
   return axiosInstance.get<unknown, { playlist: AlbumType }>(
     `/playlist/detail?id=${id}`
   );
+};
+
+export const getSingerInfoRequest = (id: string) => {
+  return axiosInstance.get<
+    unknown,
+    {
+      artist: Pick<SingerItemState, 'artist'>['artist'];
+      hotSongs: Pick<SingerItemState, 'songs'>['songs'];
+    }
+  >(`/artists?id=${id}`);
 };

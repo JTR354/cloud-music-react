@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { currentAlbumMock } from './mock';
-
 export type AlbumTracksType = {
   name: string;
   ar: [{ name: string }, { name: string }];

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import type { PropType as ScrollPropType } from '../../baseUI/scroll';
 import Scroll from '../../baseUI/scroll';
@@ -15,6 +16,7 @@ const SignerList: FC<
   singerList,
   children,
 }) => {
+  const navigate = useNavigate();
   return (
     <ListContainer>
       <Scroll
@@ -26,7 +28,12 @@ const SignerList: FC<
         <List>
           {singerList.map((item, index) => {
             return (
-              <ListItem key={item.accountId + '' + index}>
+              <ListItem
+                key={item.accountId + '' + index}
+                onClick={() => {
+                  navigate(`/singers/${item.id}`);
+                }}
+              >
                 <div className="img_wrapper">
                   <img
                     src={`${item.picUrl}?param=300x300`}
@@ -42,6 +49,7 @@ const SignerList: FC<
         </List>
       </Scroll>
       {children}
+      <Outlet />
     </ListContainer>
   );
 };

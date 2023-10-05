@@ -8,6 +8,7 @@ import Album from '../application/Album';
 import Home from '../application/Home';
 import Rank from '../application/Rank';
 import Recommend from '../application/Recommend';
+import Singer from '../application/Singer';
 import Singers from '../application/Singers';
 
 const router = createBrowserRouter([
@@ -33,6 +34,12 @@ const router = createBrowserRouter([
       {
         path: '/singers',
         Component: Singers,
+        children: [
+          {
+            path: '/singers/:id',
+            Component: Singer,
+          },
+        ],
       },
       {
         path: '/rank',

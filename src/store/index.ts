@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import album from '../application/Album/slice';
 import rank from '../application/Rank/slice';
 import recommend from '../application/Recommend/slice';
+import singer from '../application/Singer/slice';
 import singers from '../application/Singers/slice';
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     singers,
     rank,
     album,
+    singer,
   },
 });
 
