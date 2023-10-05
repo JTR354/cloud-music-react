@@ -4,7 +4,7 @@ import { RankItem } from '../application/Rank/slice';
 import { RankTypes } from './config';
 
 //src/api/utils.js
-export const getCount = (count: number) => {
+export const getCount = (count: number | undefined = 0) => {
   if (count < 0) return;
   if (count < 10000) {
     return count;
@@ -51,3 +51,17 @@ export const filterIdx = (name: string) => {
   }
   return null;
 };
+
+//处理歌手列表拼接歌手名字
+export const getName = (list: { name: string }[]) => {
+  let str = '';
+  list.map((item, index) => {
+    str += index === 0 ? item.name : '/' + item.name;
+    return item;
+  });
+  return str;
+};
+
+//判断一个对象是否为空
+export const isEmptyObject = (obj: unknown) =>
+  !obj || Object.keys(obj).length === 0;

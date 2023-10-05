@@ -14,7 +14,6 @@ const HeaderContainer = styled.div`
   display: flex;
   line-height: 40px;
   color: ${style['font-color-light']};
-  color: red;
   .back {
     margin-right: 5px;
     font-size: 20px;
@@ -28,15 +27,21 @@ const HeaderContainer = styled.div`
 // 处理函数组件拿不到 ref 的问题，所以用 forwardRef
 const Header = forwardRef<
   HTMLDivElement,
-  { title: string; handleClick: () => void }
+  { title: string; handleClick: () => void; isMarquee: boolean }
 >((props, ref) => {
-  const { handleClick, title } = props;
+  const { handleClick, title, isMarquee } = props;
   return (
     <HeaderContainer ref={ref}>
       <i className="iconfont back" onClick={handleClick}>
         &#xe655;
       </i>
-      <h1>{title}</h1>
+      {isMarquee ? (
+        <marquee>
+          <h1>{title}</h1>
+        </marquee>
+      ) : (
+        <h1>{title}</h1>
+      )}
     </HeaderContainer>
   );
 });

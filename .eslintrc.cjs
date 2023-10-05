@@ -29,7 +29,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    'arrow-body-style': ['error', 'always'],
+    'arrow-body-style': 0,
     semi: ['error', 'always'],
   },
 };

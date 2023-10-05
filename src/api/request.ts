@@ -1,3 +1,4 @@
+import { AlbumType } from '../application/Album/slice';
 import { RankItem } from '../application/Rank/slice';
 import type { SingerState } from '../application/Singers/slice';
 import { axiosInstance } from './config';
@@ -28,4 +29,10 @@ export const getSingerListRequest = (
 
 export const getRankListRequest = () => {
   return axiosInstance.get<unknown, { list: RankItem[] }>(`/toplist/detail`);
+};
+
+export const getAlbumDetailRequest = (id: string | undefined) => {
+  return axiosInstance.get<unknown, { playlist: AlbumType }>(
+    `/playlist/detail?id=${id}`
+  );
 };
