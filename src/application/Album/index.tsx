@@ -25,6 +25,7 @@ const Album = () => {
 
   const handleBack = () => {
     setShowStatus(false);
+    setEnterLoading(false);
   };
 
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Album = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isEmptyObject(currentAlbum)) {
+    if (!isEmptyObject(currentAlbum) && String(currentAlbum?.id) === id) {
       setEnterLoading(false);
       return;
     }

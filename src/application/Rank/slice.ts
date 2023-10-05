@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export type RankItem = {
+  id: number;
   coverImgId: string;
   tracks: { first: string; second: string }[];
   updateFrequency: string;

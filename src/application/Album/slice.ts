@@ -10,6 +10,7 @@ export type AlbumTracksType = {
   };
 };
 export type AlbumType = {
+  id?: number;
   creator: {
     avatarUrl?: string;
     nickname?: string;
@@ -25,7 +26,7 @@ type AlbumState = {
 };
 
 const albumInitial: AlbumState = {
-  currentAlbum: currentAlbumMock || { tracks: [], creator: {} },
+  currentAlbum: { tracks: [], creator: {} },
 };
 
 const alumSlice = createSlice({

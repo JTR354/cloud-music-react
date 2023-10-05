@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { getRankListRequest } from '../../api/request';
-import { filterIdx, filterIndex } from '../../api/utils';
+import { filterIndex } from '../../api/utils';
 import Loading from '../../baseUI/loading';
 import Scroll from '../../baseUI/scroll';
 import { RootState } from '../../store';
 import RankList from './RankList';
-import { changeRankList } from './slice';
+import { changeRankList, RankItem } from './slice';
 import { Container } from './style';
 
 const Rank = () => {
@@ -42,14 +43,10 @@ const Rank = () => {
   const officialList = rankList.slice(0, globalStartIndex);
   const globalList = rankList.slice(globalStartIndex);
 
-  const enterDetail = (name: string) => {
-    console.info(name);
-    const idx = filterIdx(name);
-    if (idx === null) {
-      // alert('暂无相关数据');
-      return;
-    }
-    console.info(idx);
+  const navigate = useNavigate();
+
+  const enterDetail = (item: RankItem) => {
+    navigate(`/rank/${item.id}`);
   };
 
   return (
@@ -68,6 +65,7 @@ const Rank = () => {
             <Loading show={loading}></Loading>
           </div>
         </Scroll>
+        <Outlet />
       </Container>
     </>
   );

@@ -6,17 +6,17 @@ import { List, ListItem, SongList } from './style';
 const RankList: FC<{
   list: RankItem[];
   global?: boolean;
-  onClick?: (name: string) => void;
+  onClick?: (item: RankItem) => void;
 }> = ({ list, global, onClick }) => {
   return (
     <List globalRank={global}>
       {list.map((item, index) => {
         return (
           <ListItem
-            key={item.coverImgId + index}
+            key={item.coverImgId + index + item.id}
             tracks={item.tracks}
             onClick={() => {
-              onClick?.(item.name);
+              onClick?.(item);
             }}
           >
             <div className="img_wrapper">

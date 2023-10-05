@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         Component: Recommend,
         children: [
           {
-            path: '/recommend/:id',
+            path: ':id',
             Component: Album,
           },
         ],
@@ -35,8 +35,14 @@ const router = createBrowserRouter([
         Component: Singers,
       },
       {
-        path: 'rank',
+        path: '/rank',
         Component: Rank,
+        children: [
+          {
+            path: '/rank/:id',
+            Component: Album,
+          },
+        ],
       },
     ],
   },
