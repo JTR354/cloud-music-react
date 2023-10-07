@@ -6,6 +6,7 @@
     "lazyload",
     "reduxjs",
     "swiper",
-    "toplist"
+    "toplist",
+    "vconsole"
   ]
 }
