@@ -1,0 +1,22 @@
+name: Deploy To Github pages
+on:
+  push:
+    branchs:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Install and Build
+        run: |
+          npm ci
+          npm run build:github
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages
+          folder: build
