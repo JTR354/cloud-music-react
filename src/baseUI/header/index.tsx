@@ -1,5 +1,4 @@
-//baseUI/header/index.js
-import { forwardRef } from 'react';
+import { createElement, forwardRef } from 'react';
 import styled from 'styled-components';
 
 import style from '../../assets/global-style';
@@ -36,9 +35,7 @@ const Header = forwardRef<
         &#xe655;
       </i>
       {isMarquee ? (
-        <marquee>
-          <h1>{title}</h1>
-        </marquee>
+        createElement('marquee', {}, <h1>{title}</h1>)
       ) : (
         <h1>{title}</h1>
       )}

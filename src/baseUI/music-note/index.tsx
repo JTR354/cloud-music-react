@@ -26,7 +26,7 @@ export type MusicNoteRef = {
 };
 
 type NodeItem = HTMLDivElement & { running: boolean };
-const MusicNote = forwardRef<MusicNoteRef>((props, ref) => {
+const MusicNote = forwardRef<MusicNoteRef>((_props, ref) => {
   const iconsRef = useRef<HTMLDivElement>(null);
   // 容器中有 3 个音符，也就是同时只能有 3 个音符下落
   const ICON_NUMBER = 3;
