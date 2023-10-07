@@ -47,3 +47,9 @@ export const getSingerInfoRequest = (id: string) => {
     }
   >(`/artists?id=${id}`);
 };
+
+export const getLyricRequest = (id: number | string = '') => {
+  return axiosInstance.get<unknown, { lrc: { lyric: string } }>(
+    `/lyric?id=${id}`
+  );
+};

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { playMode } from '../../api/config';
+import Lyric from '../../api/lyric-parser';
+import { getLyricRequest } from '../../api/request';
 import { findIndex, getSongUrl, isEmptyObject, shuffle } from '../../api/utils';
 import Toast, { ToastHandlerType } from '../../baseUI/toast';
 import { RootState } from '../../store';
@@ -71,6 +73,9 @@ const Player = () => {
     audioRef.current.currentTime = newTime;
     if (!playing) {
       dispatch(changePlayingState)(true);
+    }
+    if (currentLyric.current) {
+      currentLyric.current.seek(newTime * 1000);
     }
   };
 
@@ -151,6 +156,7 @@ const Player = () => {
       });
     });
     dispatch(changePlayingState(true)); //播放状态
+    getLyric(current.id);
     setCurrentTime(0); //从头开始播放
     setDuration(((current.dt || 0) / 1000) | 0); //时长
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -185,6 +191,41 @@ const Player = () => {
 
   const toastRef = useRef<ToastHandlerType>(null);
 
+  const currentLyric = useRef<Lyric | null>(null);
+  const currentLineNum = useRef(0);
+
+  const [currentPlayingLyric, setPlayingLyric] = useState('');
+
+  const handleLyric: Lyric['handler'] = ({ lineNum, txt }) => {
+    if (!currentLyric.current) return;
+    currentLineNum.current = lineNum;
+    setPlayingLyric(txt);
+  };
+
+  const getLyric = (id: PlayerState['currentSong']['id'] = '') => {
+    let lyric = '';
+    if (currentLyric.current) {
+      currentLyric.current.stop();
+    }
+    // 避免songReady恒为false的情况
+    getLyricRequest(id)
+      .then((data) => {
+        lyric = data.lrc.lyric;
+        if (!lyric) {
+          currentLyric.current = null;
+          return;
+        }
+        currentLyric.current = new Lyric(lyric, handleLyric);
+        currentLyric.current.play();
+        currentLineNum.current = 0;
+        currentLyric.current.seek(0);
+      })
+      .catch(() => {
+        songReady.current = true;
+        audioRef.current?.play();
+      });
+  };
+
   return (
     <>
       {isEmptyObject(currentSong) ? null : <MiniPlayer percent={percent} />}
@@ -197,6 +238,9 @@ const Player = () => {
           percent={percent}
           onProgressChange={onProgressChange}
           changeMode={changeMode}
+          currentPlayingLyric={currentPlayingLyric}
+          currentLyric={currentLyric.current}
+          currentLineNum={currentLineNum.current}
         />
       )}
       <audio

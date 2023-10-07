@@ -18,35 +18,6 @@ export const NormalPlayerContainer = styled.div`
   bottom: 0;
   z-index: 150;
   background: ${style['background-color']};
-  .background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.6;
-    filter: blur(20px);
-    &.layer {
-      background: ${style['font-color-desc']};
-      opacity: 0.3;
-      filter: none;
-    }
-  }
-  //NormalPlayerContainer 组件下
-  /* &.mini-enter {
-    transform: translate3d(0, 100%, 0);
-  }
-  &.mini-enter-active {
-    transform: translate3d(0, 0, 0);
-    transition: all 0.4s;
-  }
-  &.mini-exit-active {
-    transform: translate3d(0, 100%, 0);
-    transition: all 0.4s;
-  } */
-  //normalPlayer/style.js
-  //NormalPlayerContainer 样式组件下
   &.normal-enter,
   &.normal-exit-done {
     .top {
@@ -68,6 +39,21 @@ export const NormalPlayerContainer = styled.div`
   }
   &.normal-exit-active {
     opacity: 0;
+  }
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(20px);
+    &.layer {
+      background: ${style['font-color-desc']};
+      opacity: 0.3;
+      filter: none;
+    }
   }
 `;
 export const Top = styled.div`
@@ -211,5 +197,33 @@ export const Operators = styled.div`
   }
   .icon-favorite {
     color: ${style['theme-color']};
+  }
+`;
+export const LyricContainer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+`;
+export const LyricWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  p {
+    line-height: 32px;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: normal;
+    font-size: ${style['font-size-l']};
+    &.current {
+      color: #fff;
+    }
+    &.pure {
+      position: relative;
+      top: 30vh;
+    }
   }
 `;
