@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import type { NavLinkProps } from 'react-router-dom';
 import { NavLink, Outlet } from 'react-router-dom';
 
+import Player from '../Player';
 import { Tab, TabItem, Top } from './style';
 type ActiveType = Parameters<
   Exclude<NavLinkProps['className'], undefined | string>
@@ -13,6 +14,7 @@ const Home = () => {
   }, []);
   return (
     <div>
+      <Player />
       <Top>
         <span className="iconfont menu">&#xe65c;</span>
         <span className="title">WebApp</span>

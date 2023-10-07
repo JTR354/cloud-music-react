@@ -45,7 +45,7 @@ export const filterIndex = (rankList: RankItem[]) => {
 };
 
 //处理歌手列表拼接歌手名字
-export const getName = (list: { name: string }[]) => {
+export const getName = (list: { name: string }[] = []) => {
   let str = '';
   list.map((item, index) => {
     str += index === 0 ? item.name : '/' + item.name;
@@ -57,3 +57,36 @@ export const getName = (list: { name: string }[]) => {
 //判断一个对象是否为空
 export const isEmptyObject = (obj: unknown) =>
   !obj || Object.keys(obj).length === 0;
+
+// 给 css3 相关属性增加浏览器前缀，处理浏览器兼容性问题
+export type hackCSSStyleType = { [key: string | number]: unknown };
+const elementStyle = document.createElement('div')
+  .style as unknown as hackCSSStyleType;
+const vendor = (() => {
+  // 首先通过 transition 属性判断是何种浏览器
+  const transformNames = {
+    webkit: 'webkitTransform',
+    Moz: 'MozTransform',
+    O: 'OTransform',
+    ms: 'msTransform',
+    standard: 'Transform',
+  } as const;
+  type transNamesKey = keyof typeof transformNames;
+  let key: transNamesKey;
+  for (key in transformNames) {
+    if (elementStyle[transformNames[key]] !== undefined) {
+      return key;
+    }
+  }
+  return false;
+})();
+
+export function prefixStyle(style: string) {
+  if (vendor === false) {
+    return false;
+  }
+  if (vendor === 'standard') {
+    return style;
+  }
+  return vendor + style.charAt(0).toUpperCase() + style.substr(1);
+}
