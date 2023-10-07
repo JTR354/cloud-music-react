@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { playMode } from '../../api/config';
-import { findIndex, getSongUrl, shuffle } from '../../api/utils';
+import { findIndex, getSongUrl, isEmptyObject, shuffle } from '../../api/utils';
 import Toast, { ToastHandlerType } from '../../baseUI/toast';
 import { RootState } from '../../store';
 import MiniPlayer from './miniPlayer';
@@ -37,10 +37,10 @@ const Player = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!currentSong) return;
+    if (isEmptyObject(currentSong)) return;
     if (audioRef.current === null) return;
     dispatch(changeCurrentIndex(0)); //currentIndex默认为-1，临时改成0
-    const current = playList[0];
+    const current = playList[0] as PlayerState['currentSong'];
     dispatch(changeCurrentSong(current)); //赋值currentSong
     audioRef.current.src = getSongUrl(current.id);
     setTimeout(() => {
@@ -48,7 +48,7 @@ const Player = () => {
     });
     dispatch(changePlayingState(true)); //播放状态
     setCurrentTime(0); //从头开始播放
-    setDuration((current.dt / 1000) | 0); //时长
+    setDuration((Number(current.dt) / 1000) | 0); //时长
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -114,29 +114,40 @@ const Player = () => {
   //记录当前的歌曲，以便于下次重渲染时比对是否是一首歌
   const [preSong, setPreSong] = useState<PlayerState['currentSong']>({});
 
-  //先mock一份currentIndex
-  useEffect(() => {
-    dispatch(changeCurrentIndex(0));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // //先mock一份currentIndex
+  // useEffect(() => {
+  //   dispatch(changeCurrentIndex(0));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  const songReady = useRef(true);
+
+  const handleError = () => {
+    songReady.current = true;
+    alert('播放出错');
+  };
 
   useEffect(() => {
     if (
       !playList.length ||
       currentIndex === -1 ||
       !playList[currentIndex] ||
-      +playList[currentIndex].id === +(preSong.id || 0)
+      (playList[currentIndex] as PlayerState['currentSong']).id ===
+        preSong.id ||
+      !songReady.current // 标志位为 false
     )
       return;
     const current = playList[
       currentIndex
     ] as unknown as PlayerState['currentSong'];
-    dispatch(changeCurrentSong(current)); //赋值currentSong
     setPreSong(current);
+    songReady.current = false; // 把标志位置为 false, 表示现在新的资源没有缓冲完成，不能切歌
+    dispatch(changeCurrentSong(current)); //赋值currentSong
     if (audioRef.current === null) return;
     audioRef.current.src = getSongUrl(current.id);
     setTimeout(() => {
-      audioRef.current?.play();
+      audioRef.current?.play().then(() => {
+        songReady.current = true;
+      });
     });
     dispatch(changePlayingState(true)); //播放状态
     setCurrentTime(0); //从头开始播放
@@ -175,20 +186,23 @@ const Player = () => {
 
   return (
     <>
-      <MiniPlayer percent={percent} />
-      <NormalPlayer
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-        currentTime={currentTime}
-        duration={duration}
-        percent={percent}
-        onProgressChange={onProgressChange}
-        changeMode={changeMode}
-      />
+      {isEmptyObject(currentSong) ? null : <MiniPlayer percent={percent} />}
+      {isEmptyObject(currentSong) ? null : (
+        <NormalPlayer
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+          currentTime={currentTime}
+          duration={duration}
+          percent={percent}
+          onProgressChange={onProgressChange}
+          changeMode={changeMode}
+        />
+      )}
       <audio
         ref={audioRef}
         onTimeUpdate={updateTime}
         onEnded={handleEnd}
+        onError={handleError}
       ></audio>
       <Toast text={modeText} ref={toastRef}></Toast>
     </>

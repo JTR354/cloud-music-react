@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import { getSingerInfoRequest } from '../../api/request';
 import Header from '../../baseUI/header';
 import Loading from '../../baseUI/loading';
+import MusicNote, { MusicNoteRef } from '../../baseUI/music-note';
 import Scroll from '../../baseUI/scroll';
 import { RootState } from '../../store';
 import SongsList from '../SongsList';
@@ -118,6 +119,12 @@ const Singer = () => {
     setLoading(false);
   }, []);
 
+  const musicNoteRef = useRef<MusicNoteRef>(null);
+
+  const musicAnimation = (x = 0, y = 0) => {
+    musicNoteRef.current?.startAnimation({ x, y });
+  };
+
   return (
     <CSSTransition
       nodeRef={htmlEl}
@@ -144,10 +151,15 @@ const Singer = () => {
         <BgLayer ref={layer}></BgLayer>
         <SongListWrapper ref={songScrollWrapper}>
           <Scroll ref={songScroll} onScroll={handleScroll}>
-            <SongsList songs={songs} showCollect={false}></SongsList>
+            <SongsList
+              songs={songs}
+              showCollect={false}
+              musicAnimation={musicAnimation}
+            ></SongsList>
           </Scroll>
         </SongListWrapper>
         {loading ? <Loading></Loading> : null}
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </Container>
     </CSSTransition>
   );

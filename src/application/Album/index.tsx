@@ -10,6 +10,7 @@ import { isEmptyObject } from '../../api/utils';
 import style from '../../assets/global-style';
 import Header from '../../baseUI/header';
 import Loading from '../../baseUI/loading';
+import MusicNote, { MusicNoteRef } from '../../baseUI/music-note';
 import Scroll from '../../baseUI/scroll';
 import { RootState } from '../../store';
 import AlbumMenu from './menu';
@@ -81,6 +82,12 @@ const Album = () => {
   );
   const headerEl = useRef<HTMLDivElement>(null);
 
+  const musicNoteRef = useRef<MusicNoteRef>(null);
+
+  const musicAnimation = (x = 0, y = 0) => {
+    musicNoteRef.current?.startAnimation({ x, y });
+  };
+
   return (
     <CSSTransition
       nodeRef={nodeRef}
@@ -105,11 +112,12 @@ const Album = () => {
             <div>
               <AlbumTopDesc />
               <AlbumMenu />
-              <AlbumSongList />
+              <AlbumSongList musicAnimation={musicAnimation} />
             </div>
           </Scroll>
         ) : null}
         {enterLoading ? <Loading></Loading> : null}
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </Container>
     </CSSTransition>
   );

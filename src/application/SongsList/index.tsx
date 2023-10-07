@@ -1,23 +1,45 @@
 import { forwardRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { getName } from '../../api/utils';
+import {
+  changeCurrentIndex,
+  changePlayList,
+  changeSequencePlayList,
+} from '../Player/slice';
 import { SingerItemState } from '../Singer/slice';
 import { SongItem, SongList } from './style';
 
 type PropType = {
   collectCount?: number;
   showCollect: boolean;
-  songs: Pick<SingerItemState, 'songs'>['songs'];
+  songs: SingerItemState['songs'];
   showBackground?: boolean;
+  musicAnimation: (x: number, y: number) => void;
 };
 
 const SongsList = forwardRef<HTMLDivElement, PropType>((props, refs) => {
-  const { collectCount, showCollect, songs, showBackground = false } = props;
+  const {
+    collectCount,
+    showCollect,
+    songs,
+    showBackground = false,
+    musicAnimation,
+  } = props;
 
   const totalCount = songs.length;
 
-  const selectItem = (_: unknown, index: number) => {
-    console.log(index);
+  // const player = useSelector((state: RootState) => state.player);
+  const dispatch = useDispatch();
+
+  const selectItem = (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    index: number
+  ) => {
+    dispatch(changePlayList(songs));
+    dispatch(changeSequencePlayList(songs));
+    dispatch(changeCurrentIndex(index));
+    musicAnimation(e.nativeEvent.clientX, e.nativeEvent.clientY);
   };
 
   const songList = (list: Pick<PropType, 'songs'>['songs']) => {
