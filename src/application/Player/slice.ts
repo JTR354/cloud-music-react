@@ -6,11 +6,11 @@ import { playMode } from '../../api/config';
 export type PlayerState = {
   fullScreen: boolean; // 播放器是否为全屏模式
   playing: boolean; // 当前歌曲是否播放
-  sequencePlayList: []; // 顺序列表 (因为之后会有随机模式，列表会乱序，因从拿这个保存顺序列表)
+  sequencePlayList: PlayerState['playList']; // 顺序列表 (因为之后会有随机模式，列表会乱序，因从拿这个保存顺序列表)
   playList: PlayerState['currentSong'][];
   mode: number; // 播放模式
   currentIndex: number; // 当前歌曲在播放列表的索引位置
-  showPlayList: number; // 是否展示播放列表
+  showPlayList: boolean; // 是否展示播放列表
   currentSong: {
     id?: string | number;
     name?: string;
@@ -22,7 +22,7 @@ export type PlayerState = {
 
 // import mock from './mock';
 
-export const playerInitial = {
+export const playerInitial: PlayerState = {
   fullScreen: false, // 播放器是否为全屏模式
   playing: false, // 当前歌曲是否播放
   sequencePlayList: [], // 顺序列表 (因为之后会有随机模式，列表会乱序，因从拿这个保存顺序列表)
@@ -30,7 +30,7 @@ export const playerInitial = {
   mode: playMode.sequence, // 播放模式
   currentIndex: -1, // 当前歌曲在播放列表的索引位置
   showPlayList: false, // 是否展示播放列表
-  currentSong: {} as PlayerState['currentSong'],
+  currentSong: {},
 };
 
 const playerSlice = createSlice({
@@ -89,6 +89,13 @@ export function usePlayerHandler() {
     ) {
       e.stopPropagation();
       dispatch(changePlayingState(playing));
+    },
+    toggleShowPlayList(
+      e: React.MouseEvent<HTMLElement, MouseEvent>,
+      bool: boolean
+    ) {
+      e.stopPropagation();
+      dispatch(changeShowPlayList(bool));
     },
   };
 }

@@ -7,6 +7,7 @@ import Toast, { ToastHandlerType } from '../../baseUI/toast';
 import { RootState } from '../../store';
 import MiniPlayer from './miniPlayer';
 import NormalPlayer from './normalPlayer';
+import PlayList from './playerList';
 import {
   changeCurrentIndex,
   changeCurrentSong,
@@ -170,7 +171,7 @@ const Player = () => {
       setModeText('单曲循环');
     } else if (newMode === 2) {
       //随机播放
-      const newList = shuffle(sequencePlayList);
+      const newList = shuffle(sequencePlayList as []);
       const index = findIndex(currentSong, newList);
       dispatch(changePlayList(newList));
       dispatch(changeCurrentIndex(index));
@@ -204,6 +205,7 @@ const Player = () => {
         onEnded={handleEnd}
         onError={handleError}
       ></audio>
+      <PlayList></PlayList>
       <Toast text={modeText} ref={toastRef}></Toast>
     </>
   );

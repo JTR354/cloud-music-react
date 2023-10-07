@@ -48,7 +48,8 @@ const NormalPlayer: FC<{
     mode,
   } = useSelector((state: RootState) => state.player);
 
-  const { toggleFullScreen, clickPlaying } = usePlayerHandler();
+  const { toggleFullScreen, clickPlaying, toggleShowPlayList } =
+    usePlayerHandler();
   // const { song, fullScreen, toggleFullScreen } = props;
   const normalPlayerRef = useRef<HTMLDivElement>(null);
   const cdWrapperRef = useRef<HTMLDivElement>(null);
@@ -215,7 +216,10 @@ const NormalPlayer: FC<{
             <div className="icon i-right" onClick={handleNext}>
               <i className="iconfont">&#xe718;</i>
             </div>
-            <div className="icon i-right">
+            <div
+              className="icon i-right"
+              onClick={(e) => toggleShowPlayList(e, true)}
+            >
               <i className="iconfont">&#xe640;</i>
             </div>
           </Operators>

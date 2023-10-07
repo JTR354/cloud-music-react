@@ -17,7 +17,8 @@ const MiniPlayer: FC<{
     currentSong: song,
   } = useSelector((state: RootState) => state.player);
 
-  const { toggleFullScreen, clickPlaying } = usePlayerHandler();
+  const { toggleFullScreen, clickPlaying, toggleShowPlayList } =
+    usePlayerHandler();
 
   const miniPlayerRef = useRef<HTMLDivElement>(null);
   return (
@@ -73,7 +74,7 @@ const MiniPlayer: FC<{
             )}
           </ProgressCircle>
         </div>
-        <div className="control">
+        <div className="control" onClick={(e) => toggleShowPlayList(e, true)}>
           <i className="iconfont">&#xe640;</i>
         </div>
       </MiniPlayerContainer>
