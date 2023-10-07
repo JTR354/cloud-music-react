@@ -1,20 +1,25 @@
 import { FC, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import { getName } from '../../../api/utils';
 import ProgressCircle from '../../../baseUI/progress-circle';
-import { PlayerHandler, PlayerState } from '../slice';
+import { RootState } from '../../../store';
+import { usePlayerHandler } from '../slice';
 import { MiniPlayerContainer } from './style';
 
 const MiniPlayer: FC<{
-  song: PlayerState['currentSong'];
-  fullScreen: PlayerState['fullScreen'];
-  toggleFullScreen: PlayerHandler['toggleFullScreen'];
-}> = (props) => {
-  const { song, fullScreen, toggleFullScreen } = props;
+  percent: number;
+}> = ({ percent }) => {
+  const {
+    fullScreen,
+    playing,
+    currentSong: song,
+  } = useSelector((state: RootState) => state.player);
+
+  const { toggleFullScreen, clickPlaying } = usePlayerHandler();
 
   const miniPlayerRef = useRef<HTMLDivElement>(null);
-  const percent = 0.2;
   return (
     <CSSTransition
       in={!fullScreen}
@@ -37,7 +42,7 @@ const MiniPlayer: FC<{
         <div className="icon">
           <div className="imgWrapper">
             <img
-              className="play"
+              className={`play ${playing ? '' : 'pause'}`}
               src={song.al?.picUrl}
               width="40"
               height="40"
@@ -49,12 +54,23 @@ const MiniPlayer: FC<{
           <h2 className="name">{song.name}</h2>
           <p className="desc">{getName(song.ar)}</p>
         </div>
-        {/* <div className="control">
-          <i className="iconfont">&#xe650;</i>
-        </div> */}
         <div className="control">
           <ProgressCircle radius={32} percent={percent}>
-            <i className="icon-mini iconfont icon-pause">&#xe650;</i>
+            {playing ? (
+              <i
+                className="icon-mini iconfont icon-pause"
+                onClick={(e) => clickPlaying(e, false)}
+              >
+                &#xe650;
+              </i>
+            ) : (
+              <i
+                className="icon-mini iconfont icon-play"
+                onClick={(e) => clickPlaying(e, true)}
+              >
+                &#xe61e;
+              </i>
+            )}
           </ProgressCircle>
         </div>
         <div className="control">

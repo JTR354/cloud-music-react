@@ -90,3 +90,41 @@ export function prefixStyle(style: string) {
   }
   return vendor + style.charAt(0).toUpperCase() + style.substr(1);
 }
+
+//拼接出歌曲的url链接
+export const getSongUrl = (id: string | number = 0) => {
+  return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+};
+
+//转换歌曲播放时间
+export const formatPlayTime = (interval: number) => {
+  interval = interval | 0; // |0表示向下取整
+  const minute = (interval / 60) | 0;
+  const second = (interval % 60).toString().padStart(2, '0');
+  return `${minute}:${second}`;
+};
+
+function getRandomInt(min = 0, max = 0) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+// 随机算法
+export function shuffle(arr = []) {
+  const new_arr: { id?: unknown }[] = [];
+  arr.forEach((item) => {
+    new_arr.push(item);
+  });
+  for (let i = 0; i < new_arr.length; i++) {
+    const j = getRandomInt(0, i);
+    const t = new_arr[i];
+    new_arr[i] = new_arr[j];
+    new_arr[j] = t;
+  }
+  return new_arr;
+}
+
+// 找到当前的歌曲索引
+export const findIndex = (song: { id?: unknown }, list: { id?: unknown }[]) => {
+  return list.findIndex((item) => {
+    return song.id === item.id;
+  });
+};

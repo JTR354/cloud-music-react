@@ -54,7 +54,7 @@ export const MiniPlayerContainer = styled.div`
       img {
         border-radius: 50%;
         &.play {
-          animation: ${rotate} 10s infinite;
+          animation: ${rotate} 10s linear infinite;
           &.pause {
             animation-play-state: paused;
           }
