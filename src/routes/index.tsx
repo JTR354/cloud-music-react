@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from 'react-router-dom';
+import { createHashRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 import Album from '../application/Album';
 import Home from '../application/Home';
@@ -12,7 +8,7 @@ import Search from '../application/Search';
 import Singer from '../application/Singer';
 import Singers from '../application/Singers';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     Component: Home,
