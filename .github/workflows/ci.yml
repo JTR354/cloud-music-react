@@ -1,20 +1,31 @@
 name: Deploy To Github pages
 on:
   push:
-    branchs:
+    branches:
       - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 18.x
+        pnpm:
+          - 8.8.0
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
       - name: Install and Build
         run: |
-          npm ci
-          npm run build:github
+          pnpm install
+          pnpm build:github
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
