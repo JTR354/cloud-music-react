@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import type { NavLinkProps } from 'react-router-dom';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 import Player from '../Player';
 import { Tab, TabItem, Top } from './style';
@@ -12,13 +12,21 @@ const Home = () => {
   const active = useCallback(({ isActive, isPending }: ActiveType) => {
     return isPending ? 'pending' : isActive ? 'selected' : '';
   }, []);
+  const navigate = useNavigate();
   return (
     <div>
       <Player />
       <Top>
         <span className="iconfont menu">&#xe65c;</span>
         <span className="title">WebApp</span>
-        <span className="iconfont search">&#xe62b;</span>
+        <span
+          className="iconfont search"
+          onClick={() => {
+            navigate('/search');
+          }}
+        >
+          &#xe62b;
+        </span>
       </Top>
       <Tab>
         <NavLink to="/recommend" className={active}>

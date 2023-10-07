@@ -25,7 +25,6 @@ const OFFSET = 5;
 
 const Singer = () => {
   const { id = '' } = useParams<{ id: string }>();
-  console.log(id);
   const htmlEl = useRef(null);
   const navigate = useNavigate();
   const [showStatus, setShowStatus] = useState(true);
@@ -133,7 +132,7 @@ const Singer = () => {
       classNames="fly"
       appear={true}
       unmountOnExit
-      onExited={() => navigate('..', { relative: 'path' })}
+      onExited={() => navigate('..', { relative: 'route' })}
     >
       <Container ref={htmlEl}>
         <Header

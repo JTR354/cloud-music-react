@@ -1,5 +1,7 @@
 import { AlbumType } from '../application/Album/slice';
+import { PlayerState } from '../application/Player/slice';
 import { RankItem } from '../application/Rank/slice';
+import { SearchState } from '../application/Search/slice';
 import { SingerItemState } from '../application/Singer/slice';
 import type { SingerState } from '../application/Singers/slice';
 import { axiosInstance } from './config';
@@ -52,4 +54,30 @@ export const getLyricRequest = (id: number | string = '') => {
   return axiosInstance.get<unknown, { lrc: { lyric: string } }>(
     `/lyric?id=${id}`
   );
+};
+
+export const getSuggestListRequest = (query: string = '') => {
+  return axiosInstance.get<unknown, { result: SearchState['suggestList'] }>(
+    `/search/suggest?keywords=${query}`
+  );
+};
+
+export const getResultSongsListRequest = (query: string = '') => {
+  return axiosInstance.get<
+    unknown,
+    { result: { songs: SearchState['songsList'] } }
+  >(`/search?keywords=${query}`);
+};
+
+export const getSongDetailRequest = (id: string = '') => {
+  return axiosInstance.get<unknown, { songs: PlayerState['currentSong'][] }>(
+    `/song/detail?ids=${id}`
+  );
+};
+
+export const getHotKeyWordsRequest = () => {
+  return axiosInstance.get<
+    unknown,
+    { result: { hots: SearchState['hotList'] } }
+  >(`/search/hot`);
 };

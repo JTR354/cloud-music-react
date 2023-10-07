@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 import { playMode } from '../../api/config';
+import { findIndex } from '../../api/utils';
 
 export type PlayerState = {
   fullScreen: boolean; // 播放器是否为全屏模式
@@ -61,6 +62,56 @@ const playerSlice = createSlice({
     changeShowPlayList: (state, { payload }) => {
       state.showPlayList = payload;
     },
+    insertSong: (state, { payload }) => {
+      const song = payload;
+      const { currentIndex: index, playList, sequencePlayList } = state;
+      let currentIndex = index;
+      //看看有没有同款
+      const fpIndex = findIndex(song, playList);
+      // 如果是当前歌曲直接不处理
+      if (fpIndex === currentIndex && currentIndex !== -1) return state;
+      currentIndex++;
+      // 把歌放进去,放到当前播放曲目的下一个位置
+      playList.splice(currentIndex, 0, song);
+      // 如果列表中已经存在要添加的歌
+      if (fpIndex > -1) {
+        if (currentIndex > fpIndex) {
+          playList.splice(fpIndex, 1);
+          currentIndex--;
+        } else {
+          playList.splice(fpIndex + 1, 1);
+        }
+      }
+      let sequenceIndex =
+        findIndex(playList[currentIndex], sequencePlayList) + 1;
+      const fsIndex = findIndex(song, sequencePlayList);
+      sequencePlayList.splice(sequenceIndex, 0, song);
+      if (fsIndex > -1) {
+        if (sequenceIndex > fsIndex) {
+          sequencePlayList.splice(fsIndex, 1);
+          sequenceIndex--;
+        } else {
+          sequencePlayList.splice(fsIndex + 1, 1);
+        }
+      }
+      state.currentIndex = currentIndex;
+      state.playList = playList;
+      state.sequencePlayList = sequencePlayList;
+    },
+    deleteSong: (state, { payload: song }) => {
+      const { playList, currentIndex: index, sequencePlayList } = state;
+      let currentIndex = index;
+      const fpIndex = findIndex(song, playList);
+      playList.splice(fpIndex, 1);
+      if (fpIndex < currentIndex) currentIndex--;
+
+      const fsIndex = findIndex(song, sequencePlayList);
+      sequencePlayList.splice(fsIndex, 1);
+
+      state.currentIndex = currentIndex;
+      state.playList = playList;
+      state.sequencePlayList = sequencePlayList;
+    },
   },
 });
 
@@ -73,6 +124,7 @@ export const {
   changePlayMode,
   changeCurrentIndex,
   changeShowPlayList,
+  insertSong,
 } = playerSlice.actions;
 
 export function usePlayerHandler() {

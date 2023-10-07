@@ -17,6 +17,8 @@ export type AlbumType = {
   subscribedCount?: number;
   name?: string;
   tracks: AlbumTracksType[];
+  artists?: [];
+  album?: { name: string };
 };
 
 type AlbumState = {

@@ -8,6 +8,7 @@ import Album from '../application/Album';
 import Home from '../application/Home';
 import Rank from '../application/Rank';
 import Recommend from '../application/Recommend';
+import Search from '../application/Search';
 import Singer from '../application/Singer';
 import Singers from '../application/Singers';
 
@@ -15,7 +16,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     Component: Home,
-    errorElement: <h1>404</h1>,
     children: [
       {
         index: true,
@@ -50,6 +50,14 @@ const router = createBrowserRouter([
             Component: Album,
           },
         ],
+      },
+      {
+        path: '/search',
+        Component: Search,
+      },
+      {
+        path: '/album/:id',
+        Component: Album,
       },
     ],
   },

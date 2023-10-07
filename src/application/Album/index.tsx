@@ -97,7 +97,7 @@ const Album = () => {
       appear={true}
       unmountOnExit
       onExited={() => {
-        navigate('..', { relative: 'path' });
+        navigate('..', { relative: 'route' });
       }}
     >
       <Container ref={nodeRef}>

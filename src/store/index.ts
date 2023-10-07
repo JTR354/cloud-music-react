@@ -4,6 +4,7 @@ import album from '../application/Album/slice';
 import player from '../application/Player/slice';
 import rank from '../application/Rank/slice';
 import recommend from '../application/Recommend/slice';
+import search from '../application/Search/slice';
 import singer from '../application/Singer/slice';
 import singers from '../application/Singers/slice';
 
@@ -15,6 +16,7 @@ export const store = configureStore({
     album,
     singer,
     player,
+    search,
   },
 });
 
