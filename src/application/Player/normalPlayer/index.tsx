@@ -208,8 +208,10 @@ const NormalPlayer: FC<{
           <div className="back" onClick={() => toggleFullScreen(false)}>
             <i className="iconfont icon-back">&#xe662;</i>
           </div>
-          <h1 className="title">{song.name}</h1>
-          <h1 className="subtitle">{getName(song.ar)}</h1>
+          <div className="text">
+            <h1 className="title">{song.name}</h1>
+            <h1 className="subtitle">{getName(song.ar)}</h1>
+          </div>
         </Top>
         <Middle ref={cdWrapperRef} onClick={toggleCurrentState}>
           <CSSTransition
@@ -219,12 +221,14 @@ const NormalPlayer: FC<{
             nodeRef={cdRef}
           >
             <CDWrapper
+              ref={cdRef}
               style={{
                 visibility:
                   currentState.current !== 'lyric' ? 'visible' : 'hidden',
               }}
             >
-              <div className="cd" ref={cdRef}>
+              <div className={`needle ${playing ? '' : 'pause'}`}></div>
+              <div className="cd">
                 <img
                   className={`image play ${playing ? '' : 'pause'}`}
                   src={song.al?.picUrl + '?param=400x400'}
